@@ -4,4 +4,9 @@
   <artifactId>rmodel-search</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <modules>
+  	<module>search-utils</module>
+  	<module>rest-service-runtime</module>
+  	<module>war-search</module>
+  </modules>
 </project>

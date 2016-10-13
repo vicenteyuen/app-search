@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1"
+  metadata-complete="true">
+  
+  <display-name>Restful api</display-name>
+
+	<context-param>
+	 	<param-name>cms.rs.Applications</param-name>
+	  	<param-value>com.ma.cms.app.ApplicationV1_x</param-value>
+	</context-param>
+
+ 
+    <context-param>
+        <param-name>resteasy.guice.stage</param-name>
+        <param-value>DEVELOPMENT</param-value>
+    </context-param>
+
+   
+    <context-param>
+        <param-name>resteasy.guice.modules</param-name>
+        <param-value>
+        	com.ma.cms.module.ConfigrationModule,
+        	com.ma.cms.module.CustomMyBatisModule,
+        	com.ma.cms.app.ResourceModule
+        </param-value>
+    </context-param>
+  
+  
+  <listener>
+  	<listener-class>
+  		com.ma.base.listener.CustomBootstrapServletContextListener
+  	</listener-class>
+  </listener>
+
+
+  
+</web-app>
