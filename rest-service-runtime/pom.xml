@@ -35,5 +35,15 @@
   		<artifactId>slf4j-api</artifactId>
   		<version>1.7.21</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.google.inject</groupId>
+  		<artifactId>guice</artifactId>
+  		<version>4.1.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.vsg</groupId>
+  		<artifactId>resteasy-guice-support</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

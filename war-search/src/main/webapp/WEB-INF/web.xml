@@ -10,8 +10,8 @@
   <display-name>Restful api</display-name>
 
 	<context-param>
-	 	<param-name>cms.rs.Applications</param-name>
-	  	<param-value>com.ma.cms.app.ApplicationV1_x</param-value>
+	 	<param-name>org.vsg.rs.Applications</param-name>
+	  	<param-value>org.vsg.rmodel.search.v1.app.ApplicationV1_x</param-value>
 	</context-param>
 
  
@@ -24,16 +24,14 @@
     <context-param>
         <param-name>resteasy.guice.modules</param-name>
         <param-value>
-        	com.ma.cms.module.ConfigrationModule,
-        	com.ma.cms.module.CustomMyBatisModule,
-        	com.ma.cms.app.ResourceModule
+        	org.vsg.rmodel.module.ConfigrationModule
         </param-value>
     </context-param>
   
   
   <listener>
   	<listener-class>
-  		com.ma.base.listener.CustomBootstrapServletContextListener
+  		org.vsg.resteasy.plugins.server.servlet.GuiceBootstrap
   	</listener-class>
   </listener>
 
