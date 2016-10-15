@@ -35,8 +35,8 @@ public class SearchResource {
 	
 	
 	@GET
-	@Path("/keyword/")
-	public void getOne(@Suspended AsyncResponse asyncResponse,@QueryParam("keyword") String keyword) throws InterruptedException {
+	@Path("/keyword")
+	public void keywordSearch(@Suspended AsyncResponse asyncResponse,@QueryParam("keyword") String keyword) throws InterruptedException {
 		long startTime = System.currentTimeMillis();
 		
 		
