@@ -3,12 +3,16 @@
  */
 package org.vsg.rmodel.search.v1.resource;
 
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -35,8 +39,8 @@ public class SearchResource {
 	
 	
 	@GET
-	@Path("/keyword/")
-	public void getOne(@Suspended AsyncResponse asyncResponse,@QueryParam("keyword") String keyword) throws InterruptedException {
+	@Path("/keyword")
+	public void keywordSearch(@Suspended AsyncResponse asyncResponse,@QueryParam("keyword") String keyword) throws InterruptedException {
 		long startTime = System.currentTimeMillis();
 		
 		
@@ -57,4 +61,30 @@ public class SearchResource {
 
 	}		
 
+	@POST
+	@Path("/image")
+	@Consumes(MediaType.MULTIPART_FORM_DATA )
+	public void imageSearch(@Suspended AsyncResponse asyncResponse,
+				@FormParam("filename" ) String filename,  
+	           @FormParam( "file") InputStream uploadedInputStream) throws InterruptedException {
+		long startTime = System.currentTimeMillis();
+		
+		
+
+		
+		
+		
+		// --- set time out ---
+		asyncResponse.setTimeout(2, TimeUnit.SECONDS);
+		
+		Map result = new HashMap();
+		result.put("ok", "me");
+		
+		Response jaxrs = Response.ok( result ).type( MediaType.APPLICATION_JSON ).build();
+
+		asyncResponse.resume(jaxrs);
+
+
+	}		
+	
 }
