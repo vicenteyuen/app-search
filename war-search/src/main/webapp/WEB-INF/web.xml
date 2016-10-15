@@ -24,7 +24,8 @@
     <context-param>
         <param-name>resteasy.guice.modules</param-name>
         <param-value>
-        	org.vsg.rmodel.module.ConfigrationModule
+        	org.vsg.rmodel.module.ConfigrationModule,
+        	org.vsg.rmodel.module.ResourceModule
         </param-value>
     </context-param>
   
