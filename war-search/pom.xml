@@ -39,6 +39,13 @@
   				<include>*.*</include>
   			</includes>
   		</resource>
+    		<resource>
+  			<directory>src/main/resources/i18n</directory>
+  			<targetPath>${basedir}/target/classes/i18n</targetPath>
+  			<includes>
+  				<include>*.properties</include>
+  			</includes>
+  		</resource>		
   		<resource>
   			<directory>src/main/resources/${env}</directory>
   			<targetPath>${basedir}/target/classes</targetPath>

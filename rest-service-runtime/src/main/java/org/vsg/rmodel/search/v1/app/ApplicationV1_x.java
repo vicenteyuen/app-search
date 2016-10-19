@@ -10,6 +10,7 @@ import javax.ws.rs.ApplicationPath;
 
 import org.vsg.rest.plugins.ext.AbstractGuiceInjectApplication;
 import org.vsg.rmodel.search.v1.resource.SearchResource;
+import org.vsg.rmodel.search.v1.resource.image.ImageSearcherResource;
 
 import com.google.inject.Injector;
 
@@ -33,6 +34,7 @@ public class ApplicationV1_x extends AbstractGuiceInjectApplication {
 		
 
 		objects.add( injector.getInstance( SearchResource.class ) );
+		objects.add( injector.getInstance( ImageSearcherResource.class ) );
 
 		return objects;
 	}	

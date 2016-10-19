@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
  *
  */
 @Path("/search")
-@Produces("application/json")
 @Consumes({
 	MediaType.APPLICATION_JSON
 })
@@ -39,6 +38,7 @@ public class SearchResource {
 	
 	
 	@GET
+	@Produces("application/json")
 	@Path("/keyword")
 	public void keywordSearch(@Suspended AsyncResponse asyncResponse,@QueryParam("keyword") String keyword) throws InterruptedException {
 		long startTime = System.currentTimeMillis();
@@ -61,30 +61,5 @@ public class SearchResource {
 
 	}		
 
-	@POST
-	@Path("/image")
-	@Consumes(MediaType.MULTIPART_FORM_DATA )
-	public void imageSearch(@Suspended AsyncResponse asyncResponse,
-				@FormParam("filename" ) String filename,  
-	           @FormParam( "file") InputStream uploadedInputStream) throws InterruptedException {
-		long startTime = System.currentTimeMillis();
-		
-		
-
-		
-		
-		
-		// --- set time out ---
-		asyncResponse.setTimeout(2, TimeUnit.SECONDS);
-		
-		Map result = new HashMap();
-		result.put("ok", "me");
-		
-		Response jaxrs = Response.ok( result ).type( MediaType.APPLICATION_JSON ).build();
-
-		asyncResponse.resume(jaxrs);
-
-
-	}		
 	
 }
