@@ -1,7 +1,5 @@
 package org.vsg.rmodel.search.v1.resource.image;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -16,45 +14,44 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vsg.common.i18n.I18nMesssageSupport;
+import org.vsg.vo.model.json.ResponseObj;
 
-@Path("/search/image")
+@Path("/index/image")
 @Consumes({
 	MediaType.APPLICATION_JSON
 })
-public class ImageSearcherResource {
-	
+public class IndexerResource {
+
 	@Inject
 	private I18nMesssageSupport i18n;
+
 	
-	
-	private Logger logger = LoggerFactory.getLogger( ImageSearcherResource.class );
-	
+	private Logger logger = LoggerFactory.getLogger( ImageSearcherResource.class );	
 	
 	/**
-	 * use image search handle
+	 * create and define index
 	 * @param asyncResponse
 	 * @throws InterruptedException
 	 */
 	@GET
-	public void imageSearch(@Suspended AsyncResponse asyncResponse) throws InterruptedException {
-		
+	public void imageIndex(@Suspended AsyncResponse asyncResponse) throws InterruptedException {
 		long startTime = System.currentTimeMillis();
 
 		// --- set time out ---
-		asyncResponse.setTimeout(2, TimeUnit.SECONDS);
+		asyncResponse.setTimeout(5, TimeUnit.SECONDS);
 		
 		
-		String msg = i18n.getMessage("label.title", null);
 		
 		
-		Map result = new HashMap();
-		result.put("ok", msg);
+		// --- call index build research index ---
+
+		
+		ResponseObj result = new ResponseObj();
+		
 		
 		Response jaxrs = Response.ok( result ).type( MediaType.APPLICATION_JSON ).build();
 
-		asyncResponse.resume(jaxrs);
-
-
-	}			
+		asyncResponse.resume(jaxrs);		
+	}
 	
 }
