@@ -20,6 +20,7 @@ public class ConfigrationModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		
 		Configuration configration = loadConfigration();
 		
 		// --- set configration handle ---
@@ -27,6 +28,11 @@ public class ConfigrationModule extends AbstractModule {
 		bind(String.class).annotatedWith(Names.named("JDBC.url")).toInstance(configration.getString("oracle.url"));				
 		bind(String.class).annotatedWith(Names.named("JDBC.username")).toInstance(configration.getString("oracle.username"));						
 		bind(String.class).annotatedWith(Names.named("JDBC.password")).toInstance(configration.getString("oracle.password"));
+		
+		
+		bind(String.class).annotatedWith(Names.named("index.image.path")).toInstance(configration.getString("index.image.path"));
+		bind(String.class).annotatedWith(Names.named("image.orgin.path")).toInstance(configration.getString("image.orgin.path"));		
+		
 
 	}
 	
