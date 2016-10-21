@@ -20,19 +20,6 @@ public class ConfigrationModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		
-		Configuration configration = loadConfigration();
-		
-		// --- set configration handle ---
-		bind(String.class).annotatedWith(Names.named("JDBC.driver")).toInstance(configration.getString("oracle.driverClassName"));
-		bind(String.class).annotatedWith(Names.named("JDBC.url")).toInstance(configration.getString("oracle.url"));				
-		bind(String.class).annotatedWith(Names.named("JDBC.username")).toInstance(configration.getString("oracle.username"));						
-		bind(String.class).annotatedWith(Names.named("JDBC.password")).toInstance(configration.getString("oracle.password"));
-		
-		
-		bind(String.class).annotatedWith(Names.named("index.image.path")).toInstance(configration.getString("index.image.path"));
-		bind(String.class).annotatedWith(Names.named("image.orgin.path")).toInstance(configration.getString("image.orgin.path"));		
-		
 
 	}
 	
@@ -49,31 +36,5 @@ public class ConfigrationModule extends AbstractModule {
 		
 		return provider;
 	}
-	
-	
-	private static Configuration loadConfigration() {
-		Parameters params = new Parameters();
-		// Read data from this file
-		File propertiesFile = new File("config.properties");
-
-		FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-		    new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-		    .configure(params.fileBased()
-		        .setFile(propertiesFile));
-		try
-		{
-		    Configuration config = builder.getConfiguration();
-		    return config;
-
-		    // config contains all properties read from the file
-		}
-		catch(ConfigurationException cex)
-		{
-		    // loading of the configuration file failed
-			cex.printStackTrace();
-		}
-		return null;
-				
-	}		
 
 }

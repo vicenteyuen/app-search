@@ -60,5 +60,15 @@
   		<artifactId>lire</artifactId>
   		<version>0.9.4-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava</artifactId>
+  		<version>19.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.vsg</groupId>
+  		<artifactId>common-fileupload</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>
