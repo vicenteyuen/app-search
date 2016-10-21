@@ -1,13 +1,16 @@
 package org.vsg.rmodel.search.v1.resource.image;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.Consumes;
@@ -22,6 +25,9 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.store.FSDirectory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vsg.common.fileupload.FileItem;
@@ -31,6 +37,12 @@ import org.vsg.common.fileupload.RequestContext;
 import org.vsg.common.fileupload.disk.DiskFileItemFactory;
 import org.vsg.common.fileupload.jaxrs.JaxrsRequestContextBuilder;
 import org.vsg.common.i18n.I18nMesssageSupport;
+
+import net.semanticmetadata.lire.builders.DocumentBuilder;
+import net.semanticmetadata.lire.imageanalysis.features.global.CEDD;
+import net.semanticmetadata.lire.searchers.GenericFastImageSearcher;
+import net.semanticmetadata.lire.searchers.ImageSearchHits;
+import net.semanticmetadata.lire.searchers.ImageSearcher;
 
 @Path("/search/image")
 @Consumes({
@@ -43,7 +55,11 @@ public class ImageSearcherResource {
 
 	@Inject	
 	@Named("client.image.uploadtmp")	
-	private String clientImageUploadPath;	
+	private String clientImageUploadPath;
+	
+	@Inject
+	@Named("index.image.path")
+	private String indexImagePath;
 	
 	private Logger logger = LoggerFactory.getLogger( ImageSearcherResource.class );
 	
@@ -95,6 +111,21 @@ public class ImageSearcherResource {
 			}
 			FileItem  fileItem = fileItems.get(0);
 			// --- search files record ---
+			
+			
+	        BufferedImage img = ImageIO.read(fileItem.getInputStream());
+
+
+	        IndexReader ir = DirectoryReader.open(FSDirectory.open(Paths.get(indexImagePath)));
+	        ImageSearcher searcher = new GenericFastImageSearcher(30, CEDD.class);
+
+	        // searching with a image file ...
+	        ImageSearchHits hits = searcher.search(img, ir);
+	        // searching with a Lucene document instance ...
+	        for (int i = 0; i < hits.length(); i++) {
+	            String fileName = ir.document(hits.documentID(i)).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
+	            System.out.println(hits.score(i) + ": \t" + fileName);
+	        }
 		
 
 
