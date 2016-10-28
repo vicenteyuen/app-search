@@ -8,8 +8,8 @@ import java.util.HashMap;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.vsg.rmodel.search.api.AsyncResult;
-import org.vsg.rmodel.search.api.Callback;
+import org.vsg.common.async.AsyncResult;
+import org.vsg.common.async.Callback;
 import org.vsg.rmodel.search.api.IndexerProcessor;
 
 import net.semanticmetadata.lire.imageanalysis.features.global.AutoColorCorrelogram;

@@ -1,6 +1,6 @@
 package org.vsg.rmodel.search.service.impl;
 
-import org.vsg.rmodel.search.api.AsyncResult;
+import org.vsg.common.async.AsyncResult;
 
 public class VoidAsyncResult implements AsyncResult<Void> {
 
